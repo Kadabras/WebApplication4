@@ -41,8 +41,6 @@ else
     app.UseSwaggerUI();
 }
 
-app.UseMiddleware<GlobalErrorHandlerMidlleware>();
-
 app.UseStaticFiles();
 
 app.UseRouting();

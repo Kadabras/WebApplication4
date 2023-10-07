@@ -8,7 +8,6 @@ using WebApplication4.EfStuff.DbModel;
 using WebApplication4.EfStuff.Repositories;
 using WebApplication4.Models;
 using WebApplication4.Services;
-using WebMaze.MyExceptions;
 
 namespace WebApplication4.Controllers
 {
@@ -36,9 +35,17 @@ namespace WebApplication4.Controllers
         public IActionResult UserList(int page = 1, int perPage = 10, string typeSorted = "Name",
                                       string filterString = "", string typeFilter = "Name", bool isDescending = false)
         {
-            var users = _userRepository
-                   .SortedBy(typeSorted, filterString, typeFilter, isDescending)
-                   .ToList();
+            var users = new List<User>();
+            try
+            {
+                users = _userRepository
+                    .SortedBy(typeSorted, filterString, typeFilter, isDescending)
+                    .ToList();
+            }
+            catch
+            {
+                return BadRequest("Bad request");
+            }
 
             var paggedUsersViewModel = users.Skip((page - 1) * perPage)
                 .Take(perPage)
@@ -106,6 +113,10 @@ namespace WebApplication4.Controllers
         public IActionResult ManageUser(long Id)
         {
             var userViewModel = _mapper.Map<UserViewModel>(_userRepository.Get(Id));
+            if (userViewModel == null)
+            {
+                return NotFound("User not found");
+            }
 
             var manageUserViewModel = new ManageUserViewModel
             {
@@ -120,6 +131,10 @@ namespace WebApplication4.Controllers
         public IActionResult ManageUser(ManageUserViewModel manageUserViewModel, string role)
         {
             var dbUser = _userRepository.Get(manageUserViewModel.User.Id);
+            if (dbUser == null)
+            {
+                return NotFound("User not found");
+            }
 
             if (dbUser.Roles.Select(x => x.Name).FirstOrDefault() != role)
             {
@@ -142,14 +157,9 @@ namespace WebApplication4.Controllers
             var user = _userRepository.Get(Id);
             if (user == null)
             {
-                throw new UserNotFoundException();
+                return NotFound("User not found");
             }
             return View(_mapper.Map<UserViewModel>(user));
-        }
-
-        public IActionResult UserNotFoundError()
-        {
-            return View();
         }
     }
 }
