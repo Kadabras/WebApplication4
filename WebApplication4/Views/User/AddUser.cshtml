@@ -1,0 +1,31 @@
+﻿@model UserViewModel
+
+
+<div>
+    <form action="/User/AddUser" method="post">
+        @Html.HiddenFor(x => x.Roles)
+
+        <div>
+            Name: @Html.TextBoxFor(x => x.Name)
+        </div>
+        <div>
+            @Html.ValidationMessageFor(x => x.Name)
+        </div>
+        <div>
+            Age: @Html.TextBoxFor(x => x.Age)
+        </div>
+        <div>
+            @Html.ValidationMessageFor(x => x.Age)
+        </div>
+        <div>
+            Email: @Html.TextBoxFor(x => x.Email)
+        </div>
+        <div>
+            @Html.ValidationMessageFor(x => x.Email)
+        </div>
+        <div class="validation" asp-validation-summary="ModelOnly"></div>
+        <div>
+            <input type="Submit" value="Save" />
+        </div>
+    </form>
+</div>

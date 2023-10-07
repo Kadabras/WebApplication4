@@ -1,0 +1,39 @@
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+}
+
+.user-list {
+    padding: 10px;
+    margin: 10px;
+    border: 1px solid black;
+}
+
+.user-pagger-block {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+    .user-pagger-block a {
+        margin-right: 5px;
+    }
+
+.user-index div{
+    padding: 10px;
+    margin: 10px;
+}

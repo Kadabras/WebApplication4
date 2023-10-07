@@ -1,0 +1,28 @@
+﻿@model List<RoleViewModel>
+<div>
+    <h2 class="display-5">List of Users</h2>
+</div>
+
+<div>
+</div>
+
+<div class="user-list">
+    @foreach (var role in Model)
+    {
+        <div class="user-list">
+            <div>
+                Id: @role.Id
+            </div>
+            <div>
+                Name: @role.Name
+            </div>
+            <div>
+                Users: @foreach (var user in role.Users)
+                {
+                    <span style="padding:10px">@user  </span>
+                }
+            </div>
+        </div>
+    }
+
+</div>

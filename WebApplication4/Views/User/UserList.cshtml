@@ -1,0 +1,119 @@
+﻿@model UserListViewModel
+<div>
+    <h2 class="display-5">List of Users</h2>
+</div>
+
+<div>
+    @using (Html.BeginForm("UserList", "User", FormMethod.Post))
+    {
+        <p>
+            <label>String</label>
+            @Html.TextBox("filterString")
+        </p>
+        <p>
+            @Html.DropDownList("typeFilter", new SelectList(Model.AllTypes))
+        </p>
+        <p>
+            <input type="submit" value="Find" />
+        </p>
+    }
+</div>
+
+<div>
+</div>
+<div class="user-pagger-block">
+    @for (int i = 1; i <= Model.PaggerViewModel.TotalPageCount; i++)
+    {
+        if (i != Model.PaggerViewModel.CurrPage)
+        {
+            <a href="@Url.Action("UserList","User", new {
+                                        page = i,
+                                        perPage = Model.PaggerViewModel.PerPage,
+                                        typeSorted = Model.LastSort,
+                                        typeFilter = Model.LastFilter,
+                                        filterString = Model.LastString,
+                                        isDescending = Model.IsDescending})">
+
+                Page @i
+            </a>
+        }
+        else
+        {
+            <span>Page @i</span>
+        }
+    }
+</div>
+
+<div>
+    @for (int i = 0; i < Model.PaggerViewModel.Records.Count(); i++)
+    {
+        var user = Model.PaggerViewModel.Records[i];
+
+        <div class="user-list">
+            <div>
+                <a href="@Url.Action("UserList","User", new {
+                                        page = Model.PaggerViewModel.CurrPage,
+                                        perPage = Model.PaggerViewModel.PerPage,
+                                        typeSorted = nameof(user.Id),
+                                        typeFilter = Model.LastFilter,
+                                        filterString = Model.LastString,
+                                        isDescending = (Model.LastSort == nameof(user.Id) && !Model.IsDescending)})">
+
+                    Id: @user.Id
+                </a>
+            </div>
+            <div>
+                <a href="@Url.Action("UserList","User", new {
+                                        page = Model.PaggerViewModel.CurrPage,
+                                        perPage = Model.PaggerViewModel.PerPage,
+                                        typeSorted = nameof(user.Name),
+                                        typeFilter = Model.LastFilter,
+                                        filterString = Model.LastString,
+                                        isDescending = (Model.LastSort == nameof(user.Name) && !Model.IsDescending)})">
+
+                    Name: @user.Name
+                </a>
+            </div>
+            <div>
+                <a href="@Url.Action("UserList","User", new {
+                                        page = Model.PaggerViewModel.CurrPage,
+                                        perPage = Model.PaggerViewModel.PerPage,
+                                        typeSorted = nameof(user.Age),
+                                        typeFilter = Model.LastFilter,
+                                        filterString = Model.LastString,
+                                        isDescending = (Model.LastSort == nameof(user.Age) && !Model.IsDescending)})">
+
+                    Age: @user.Age
+                </a>
+            </div>
+            <div>
+                <a href="@Url.Action("UserList","User", new {
+                                        page = Model.PaggerViewModel.CurrPage,
+                                        perPage = Model.PaggerViewModel.PerPage,
+                                        typeSorted = nameof(user.Email),
+                                        typeFilter = Model.LastFilter,
+                                        filterString = Model.LastString,
+                                        isDescending = (Model.LastSort == nameof(user.Email) && !Model.IsDescending)})">
+
+                    Email: @user.Email
+                </a>
+            </div>
+            <div>
+                Roles: @foreach (var role in user.Roles)
+                {
+                    <span>@role   </span>
+                }
+            </div>
+            <div>
+                <span>
+                    <a href="/User/ManageUser?Id=@user.Id">Edit</a>
+                </span>
+                <span>
+                    <a href="/User/DeleteUser?Id=@user.Id">Delete</a>
+                </span>
+            </div>
+
+        </div>
+
+    }
+</div>

@@ -1,0 +1,28 @@
+﻿<div class="user-index">
+
+    <div>
+        <h2 class="display-5">Options</h2>
+    </div>
+    <div>
+        <a href="/User/UserList">User List</a>
+    </div>
+    <div>
+        <a href="/User/RoleList">Role List</a>
+    </div>
+    <div>
+        <a href="/User/AddUser">Add User</a>
+    </div>
+
+    <div>
+        @using (Html.BeginForm("GetUser", "User", FormMethod.Post))
+        {
+            <p>
+                <label>Id</label>
+                @Html.TextBox("Id")
+            </p>
+            <p>
+                <input type="submit" value="Find" />
+            </p>
+        }
+    </div>
+</div>

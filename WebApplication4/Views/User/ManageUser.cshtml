@@ -1,0 +1,43 @@
+﻿@model ManageUserViewModel
+
+<div>
+    <form action="/User/ManageUser" method="post">
+        @Html.HiddenFor(x => x.User.Id)
+
+        <div>
+            Name: @Html.TextBoxFor(x => x.User.Name)
+        </div>
+        <div>
+            @Html.ValidationMessageFor(x => x.User.Name)
+        </div>
+        <div>
+            Age: @Html.TextBoxFor(x => x.User.Age)
+        </div>
+        <div>
+            @Html.ValidationMessageFor(x => x.User.Age)
+        </div>
+        <div>
+            Email: @Html.TextBoxFor(x => x.User.Email)
+        </div>
+        <div>
+            @Html.ValidationMessageFor(x => x.User.Email)
+        </div>
+        <div>
+            Roles: @foreach (var role in Model.User.Roles)
+            {
+                <span>@role   </span>
+            }
+        </div>
+        <div>
+            Roles:
+            <p>
+                @Html.DropDownList("role", new SelectList(Model.AllRoles))
+            </p>
+
+        </div>
+        <div>
+            <input type="Submit" value="Save" />
+        </div>
+    </form>
+</div>
+
