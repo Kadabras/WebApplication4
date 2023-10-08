@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace WebApplication4.EfStuff.DbModel
+﻿namespace WebApplication4.EfStuff.DbModel
 {
     public class Role : BaseModel
     {

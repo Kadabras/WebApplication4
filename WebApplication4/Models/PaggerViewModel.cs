@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace WebApplication4.Models
+﻿namespace WebApplication4.Models
 {
     public class PaggerViewModel<T>
     {
@@ -20,30 +15,6 @@ namespace WebApplication4.Models
             }
         }
         public int CurrPage { get; set; }
-        public int StartIndex
-        {
-            get
-            {
-                var start = CurrPage - AdditionalElementsNearCurrent;
-                if (start < 0)
-                {
-                    start = 0;
-                }
-                return start;
-            }
-        }
-        public int EndIndex
-        {
-            get
-            {
-                var end = CurrPage + AdditionalElementsNearCurrent;
-                if (end > TotalPageCount)
-                {
-                    end = TotalPageCount;
-                }
-                return end;
-            }
-        }
         public List<T> Records { get; set; }
     }
 }

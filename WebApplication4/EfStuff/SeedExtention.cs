@@ -21,7 +21,6 @@ namespace WebApplication4.EfStuff
                 SeedRoles(scope);
                 SeedUsers(scope);
             }
-
         }
 
         private static void SeedRoles(IServiceScope scope)

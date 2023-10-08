@@ -3,11 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Data;
 using System.Linq;
-using WebApplication4.EfStuff;
 using WebApplication4.EfStuff.DbModel;
 using WebApplication4.EfStuff.Repositories;
 using WebApplication4.Models;
-using WebApplication4.Services;
 
 namespace WebApplication4.Controllers
 {
@@ -19,8 +17,7 @@ namespace WebApplication4.Controllers
 
         public UserController(IMapper mapper,
             UserRepository userRepository,
-            RoleRepository roleRepository
-            )
+            RoleRepository roleRepository)
         {
             _mapper = mapper;
             _userRepository = userRepository;

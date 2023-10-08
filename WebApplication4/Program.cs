@@ -1,14 +1,9 @@
 using AutoMapper;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using System.Security;
 using WebApplication4.EfStuff;
 using WebApplication4.EfStuff.DbModel;
 using WebApplication4.EfStuff.Repositories;
-using static System.Net.Mime.MediaTypeNames;
 using WebApplication4.Models;
-using WebApplication4.Services;
-using Microsoft.AspNetCore.Builder;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -52,7 +47,6 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
-
 void RegisterMapper(IServiceCollection services)
 {
     var provider = new MapperConfigurationExpression();
